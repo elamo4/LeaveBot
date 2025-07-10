@@ -10,7 +10,7 @@ const {
 } = require('@discordjs/voice');
 const { MessageFlags } = require('discord-api-types/v10'); // <-- Añadido
 
-const TOKEN = 'MTM5Mjg4NTM4MDI4NTU5OTgxNA.Gt72rS.wzbfcB33t65XtCtYdokNLRA_MQL6CNH9Sw0fcw';
+const TOKEN = 'MTM5Mjg4NTM4MDI4NTU5OTgxNA.GuLNH2.IXMVELIVCSjkn5OPfDzrCP6_gtKoSCWfUSirTk';
 const CLIENT_ID = '1392885380285599814';
 const GUILD_ID = '1392856692852785235';
 
