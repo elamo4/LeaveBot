@@ -1,0 +1,24 @@
+{
+    "name": "bot-magisalida",
+    "version": "1.0.0",
+    "description": "Bot estilo Magibot que reproduce un sonido cuando un usuario sale del canal de voz.",
+    "main": "index.js",
+    "scripts": {
+        "start": "node index.js"
+    },
+    "author": "TuNombre",
+    "license": "MIT",
+    "dependencies": {
+        "@discordjs/builders": "^1.6.1",
+        "@discordjs/opus": "^0.10.0",
+        "@discordjs/rest": "^1.6.0",
+        "@discordjs/voice": "^0.15.0",
+        "discord.js": "^14.21.0",
+        "ffmpeg-static": "^5.2.0",
+        "fs": "^0.0.1-security",
+        "fs-extra": "^11.3.0",
+        "libsodium-wrappers": "^0.7.15",
+        "node-fetch": "^3.3.2",
+        "tweetnacl": "^1.0.3"
+    }
+}
