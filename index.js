@@ -8,11 +8,12 @@ const {
   createAudioResource, entersState,
   VoiceConnectionStatus, AudioPlayerStatus
 } = require('@discordjs/voice');
-const { MessageFlags } = require('discord-api-types/v10'); // <-- Añadido
+const { MessageFlags } = require('discord-api-types/v10');
 
-const TOKEN = 'MTM5Mjg4NTM4MDI4NTU5OTgxNA.GUCNxj.5AeMusJQStoKHyGjzu4dRJ1d141vs0qM6pz9Yk';
-const CLIENT_ID = '1392885380285599814';
-const GUILD_ID = '1392856692852785235';
+// Usa variables de entorno
+const TOKEN = process.env.TOKEN;
+const CLIENT_ID = process.env.CLIENT_ID;
+const GUILD_ID = process.env.GUILD_ID;
 
 const SOUNDS_DIR = path.join(__dirname, 'sounds');
 fs.ensureDirSync(SOUNDS_DIR);
@@ -56,8 +57,6 @@ client.on('interactionCreate', async interaction => {
     await command.execute(interaction);
   } catch (error) {
     console.error(error);
-
-    // ✅ Forma actualizada usando flags
     interaction.reply({
       content: '❌ Error al ejecutar comando.',
       flags: MessageFlags.Ephemeral
