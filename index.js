@@ -1,3 +1,4 @@
+require('dotenv').config(); // ✅ Cargar variables del .env
 const fs = require('fs-extra');
 const path = require('path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
@@ -10,8 +11,7 @@ const {
 } = require('@discordjs/voice');
 const { MessageFlags } = require('discord-api-types/v10');
 
-// Usa variables de entorno
-const TOKEN = process.env.TOKEN;
+const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
 
@@ -95,7 +95,6 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
       });
 
       const resource = createAudioResource(soundFile);
-
       player.play(resource);
       connection.subscribe(player);
 
