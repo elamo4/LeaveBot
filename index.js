@@ -1,4 +1,5 @@
-require('dotenv').config(); // ✅ Cargar variables del .env
+require('dotenv').config(); // ✅ Cargar variables desde Railway o .env localmente
+
 const fs = require('fs-extra');
 const path = require('path');
 const { Client, GatewayIntentBits, Collection } = require('discord.js');
@@ -11,9 +12,15 @@ const {
 } = require('@discordjs/voice');
 const { MessageFlags } = require('discord-api-types/v10');
 
+// ✅ Usar variables de entorno seguras
 const TOKEN = process.env.DISCORD_TOKEN;
 const CLIENT_ID = process.env.CLIENT_ID;
 const GUILD_ID = process.env.GUILD_ID;
+
+if (!TOKEN || !CLIENT_ID || !GUILD_ID) {
+  console.error("❌ Faltan variables de entorno. Asegúrate de configurar DISCORD_TOKEN, CLIENT_ID y GUILD_ID en Railway.");
+  process.exit(1);
+}
 
 const SOUNDS_DIR = path.join(__dirname, 'sounds');
 fs.ensureDirSync(SOUNDS_DIR);
@@ -35,6 +42,7 @@ for (const file of commandFiles) {
   commands.push(command.data.toJSON());
 }
 
+// ✅ Registrar comandos con REST y el token desde variable
 const rest = new REST({ version: '9' }).setToken(TOKEN);
 (async () => {
   try {
@@ -46,7 +54,7 @@ const rest = new REST({ version: '9' }).setToken(TOKEN);
   } catch (error) {
     console.error('❌ Error registrando comandos:', error);
   }
-})();
+});
 
 client.on('interactionCreate', async interaction => {
   if (!interaction.isCommand()) return;
@@ -85,7 +93,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
         selfDeaf: true
       });
 
-      await entersState(connection, VoiceConnectionStatus.Ready, 10000);
+      await entersState(connection, VoiceConnectionStatus.Ready, 10_000);
 
       const player = createAudioPlayer();
 
@@ -98,7 +106,7 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
       player.play(resource);
       connection.subscribe(player);
 
-      await entersState(player, AudioPlayerStatus.Idle, 300000);
+      await entersState(player, AudioPlayerStatus.Idle, 300_000);
       connection.destroy();
 
     } catch (error) {
@@ -107,4 +115,5 @@ client.on('voiceStateUpdate', async (oldState, newState) => {
   }
 });
 
+// ✅ Iniciar sesión con el token desde env
 client.login(TOKEN);
